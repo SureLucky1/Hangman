@@ -1018,6 +1018,15 @@ const easy = document.getElementById("easy");
 const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
 const guessWord = document.querySelector("#word");
+const guessLine = document.querySelector("#line");
+
+let randomWord1 = "";
+const fiveWordsList = wordlist.filter((word) => word.length >= 5);
+const eightWordsList = wordlist.filter((word) => word.length >= 8);
+let court = [];
+let guess = 0;
+let guessedlist = [];
+let match = false;
 
 const randomWord = () => {
   return Math.floor(Math.random() * wordlist.length);
@@ -1029,20 +1038,13 @@ const getEightWord = () => {
   return Math.floor(Math.random() * eightWordsList.length);
 };
 
-let randomWord1 = "";
-const fiveWordsList = wordlist.filter((word) => word.length >= 5);
-const eightWordsList = wordlist.filter((word) => word.length >= 8);
-let court = [];
-let guess = 0;
-let guessedlist = [];
-let match = false;
-
 const word = () => {
   randomWord1 = wordlist[randomWord()];
   for (i = 0; i < randomWord1.length; i++) {
     court.push("-");
   }
-  guessWord.innerHTML = court.join("");
+  guessWord.innerHTML = randomWord1;
+  guessLine.innerHTML = court.join("");
   easy.removeEventListener("click", word);
   medium.removeEventListener("click", fiveWords);
   hard.removeEventListener("click", eightWords);
@@ -1058,7 +1060,8 @@ const fiveWords = () => {
     console.log("you are lose");
     match == ture;
   }
-  guessWord.innerHTML = court.join("");
+  guessWord.innerHTML = randomWord1;
+  guessLine.innerHTML = court.join("");
   easy.removeEventListener("click", word);
   medium.removeEventListener("click", fiveWords);
   hard.removeEventListener("click", eightWords);
@@ -1069,25 +1072,12 @@ const eightWords = () => {
   for (i = 0; i < randomWord1.length; i++) {
     court.push("-");
   }
-  guessWord.innerHTML = court.join("");
+  guessWord.innerHTML = randomWord1;
+  guessLine.innerHTML = court.join("");
   easy.removeEventListener("click", word);
   medium.removeEventListener("click", fiveWords);
   hard.removeEventListener("click", eightWords);
 };
-
-///Change it to button line 1057-1068
-// let ans = prompt("easy, medium, or hard?");
-// if (ans == "easy") {
-//   word();
-//   console.log(randomWord1);
-// } else if (ans == "medium") {
-//   fiveWords();
-//   console.log(randomFiveWords);
-// } else if (ans == "hard") {
-//   eightWords();
-// } else {
-//   let ans = prompt("easy, medium, or hard?");
-// }
 
 easy.addEventListener("click", word);
 medium.addEventListener("click", fiveWords);
