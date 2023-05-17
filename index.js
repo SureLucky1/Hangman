@@ -1013,16 +1013,99 @@ var setLetter = function (x) {
   document.getElementById("name").innerHTML += x;
 };
 
-// Another way to addEventListener
-document.getElementById("clickme").addEventListener("click", function () {
-  document.getElementById("demo").innerHTML = "Hello World";
-});
-document.getElementById("hoverme").addEventListener("mouseover", function () {
-  document.getElementById("demo").innerHTML = "Hello Coding World";
-});
-document.getElementById("hoverme").addEventListener("mouseout", function () {
-  document.getElementById("demo").innerHTML = "GoodBye Coding World";
-});
+////////////////////////////////////////////
+const randomWord = () => {
+  return Math.floor(Math.random() * wordlist.length);
+};
+const getFiveWord = () => {
+  return Math.floor(Math.random() * fiveWordsList.length);
+};
+const getEightWord = () => {
+  return Math.floor(Math.random() * eightWordsList.length);
+};
+
+let randomWord1 = "";
+const fiveWordsList = wordlist.filter((word) => word.length >= 5);
+const eightWordsList = wordlist.filter((word) => word.length >= 8);
+let court = [];
+let guess = 0;
+let guessedlist = [];
+let match = false;
+
+const fiveWords = () => {
+  randomFiveWords = fiveWordsList[getFiveWord()];
+  for (i = 0; i < randomFiveWords.length; i++) {
+    court.push("-");
+  }
+  console.log(court.join(""));
+  if (guess > 5) {
+    console.log("you are lose");
+    match == ture;
+  }
+};
+
+const eightWords = () => {
+  randomEightWords = eightWordsList[getEightWord()];
+  for (i = 0; i < randomEightWords.length; i++) {
+    court.push("-");
+  }
+  console.log(court.join(""));
+};
+
+let ans = prompt("easy, medium, or hard?");
+if (ans == "easy") {
+  word();
+  console.log(randomWord1);
+} else if (ans == "medium") {
+  fiveWords();
+  console.log(randomFiveWords);
+} else if (ans == "hard") {
+  eightWords();
+} else {
+  let ans = prompt("easy, medium, or hard?");
+}
+
+const checkAns = () => {
+  let input = prompt("");
+  console.log("line 63");
+  for (j = 0; j < input.length; j++) {
+    for (i = 0; i < input.length; i++) {
+      if (input[i] == randomFiveWords[i]) {
+        guessedlist.push(randomWord1[i]);
+        court[i] = input[i];
+      } else if (
+        randomFiveWords.includes(input[i]) &&
+        input[i] !== randomFiveWords[i]
+      ) {
+        console.log(input[i] + " is correct but wrong place");
+      }
+    }
+  }
+  console.log(court.join(""));
+
+  if (input !== randomFiveWords) {
+    let match = false;
+    guess = guess + 1;
+    console.log(`you have guess ${guess} time(s)`);
+  } else {
+    console.log("congratulations");
+  }
+};
+
+checkAns();
+while (match !== true) {
+  checkAns();
+}
+// // Another way to addEventListener
+// document.getElementById("clickme").addEventListener("click", function () {
+//   document.getElementById("demo").innerHTML = "Hello World";
+// });
+// document.getElementById("hoverme").addEventListener("mouseover", function () {
+//   document.getElementById("demo").innerHTML = "Hello Coding World";
+// });
+// document.getElementById("hoverme").addEventListener("mouseout", function () {
+//   document.getElementById("demo").innerHTML = "GoodBye Coding World";
+// });
 
 /*
 the addEventlistner will be like
