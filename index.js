@@ -1014,6 +1014,10 @@ var setLetter = function (x) {
 };
 
 ////////////////////////////////////////////
+const easy = document.getElementById("easy");
+const medium = document.getElementById("medium");
+const hard = document.getElementById("hard");
+
 const randomWord = () => {
   return Math.floor(Math.random() * wordlist.length);
 };
@@ -1032,8 +1036,16 @@ let guess = 0;
 let guessedlist = [];
 let match = false;
 
+const word = () => {
+  randomWord1 = wordlist[randomWord()];
+  for (i = 0; i < randomWord1.length; i++) {
+    court.push("-");
+  }
+  console.log(court.join(""));
+};
+
 const fiveWords = () => {
-  randomFiveWords = fiveWordsList[getFiveWord()];
+  randomWord1 = fiveWordsList[getFiveWord()];
   for (i = 0; i < randomFiveWords.length; i++) {
     court.push("-");
   }
@@ -1045,37 +1057,42 @@ const fiveWords = () => {
 };
 
 const eightWords = () => {
-  randomEightWords = eightWordsList[getEightWord()];
+  randomWord1 = eightWordsList[getEightWord()];
   for (i = 0; i < randomEightWords.length; i++) {
     court.push("-");
   }
   console.log(court.join(""));
 };
 
-let ans = prompt("easy, medium, or hard?");
-if (ans == "easy") {
-  word();
-  console.log(randomWord1);
-} else if (ans == "medium") {
-  fiveWords();
-  console.log(randomFiveWords);
-} else if (ans == "hard") {
-  eightWords();
-} else {
-  let ans = prompt("easy, medium, or hard?");
-}
+///Change it to button line 1057-1068
+// let ans = prompt("easy, medium, or hard?");
+// if (ans == "easy") {
+//   word();
+//   console.log(randomWord1);
+// } else if (ans == "medium") {
+//   fiveWords();
+//   console.log(randomFiveWords);
+// } else if (ans == "hard") {
+//   eightWords();
+// } else {
+//   let ans = prompt("easy, medium, or hard?");
+// }
+
+easy.addEventListener("click", word);
+medium.addEventListener("click", fiveWords);
+hard.addEventListener("click", eightWords);
 
 const checkAns = () => {
   let input = prompt("");
   console.log("line 63");
   for (j = 0; j < input.length; j++) {
     for (i = 0; i < input.length; i++) {
-      if (input[i] == randomFiveWords[i]) {
+      if (input[i] == randomWord1[i]) {
         guessedlist.push(randomWord1[i]);
         court[i] = input[i];
       } else if (
-        randomFiveWords.includes(input[i]) &&
-        input[i] !== randomFiveWords[i]
+        randomWord1.includes(input[i]) &&
+        input[i] !== randomWord1[i]
       ) {
         console.log(input[i] + " is correct but wrong place");
       }
@@ -1083,7 +1100,7 @@ const checkAns = () => {
   }
   console.log(court.join(""));
 
-  if (input !== randomFiveWords) {
+  if (input !== randomWord1) {
     let match = false;
     guess = guess + 1;
     console.log(`you have guess ${guess} time(s)`);
