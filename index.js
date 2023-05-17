@@ -999,19 +999,19 @@ var wordlist = [
   "your",
   "yourself",
 ];
+
 var html = "";
 var c;
-
-var setLetter = function (x) {
-  document.getElementById("name").innerHTML += x;
-};
-
 for (var i = 65; 90 >= i; i++) {
   // A-65, Z-90
   c = String.fromCharCode(i);
   html += "<button onclick=\"setLetter('" + c + "');\">" + c + "</button>";
 }
 document.getElementById("box").innerHTML = html;
+
+var setLetter = function (x) {
+  document.getElementById("name").innerHTML += x;
+};
 
 // Another way to addEventListener
 document.getElementById("clickme").addEventListener("click", function () {
