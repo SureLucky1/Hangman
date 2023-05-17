@@ -1,5 +1,5 @@
 var html = "";
-var { wordlist } = require("./wordlist.js");
+// const { wordlist } = require(".wordlist.js");
 var c;
 for (var i = 65; 90 >= i; i++) {
   // A-65, Z-90
