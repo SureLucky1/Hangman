@@ -1031,8 +1031,12 @@ const winOrLose = document.getElementById("win-lose");
 
 let randomWord1 = "";
 const easyWordList = wordlist.filter((word) => word.length <= 5);
-const fiveWordsList = wordlist.filter((word) => word.length > 5);
-const eightWordsList = wordlist.filter((word) => word.length >= 8);
+const fiveWordsList = wordlist.filter(
+  (word) => word.length > 5 && word.length < 8
+);
+const eightWordsList = wordlist.filter(
+  (word) => word.length >= 8 && word.length <= 10
+);
 let court = [];
 let guess = 0;
 let guessedlist = [];
@@ -1073,11 +1077,6 @@ const word = () => {
 const fiveWords = () => {
   randomWord1 = fiveWordsList[getFiveWord()];
   showLine();
-
-  if (guess >= 5) {
-    winOrLose.innerText = "you are lose";
-    match == ture;
-  }
   showWord();
 };
 
@@ -1086,11 +1085,6 @@ const eightWords = () => {
   showLine();
   showWord();
 };
-
-//When you click different btn, which will gererate different level words
-easy.addEventListener("click", word);
-medium.addEventListener("click", fiveWords);
-hard.addEventListener("click", eightWords);
 
 const checkAns = () => {
   let input = name1.innerText.toLowerCase();
@@ -1105,8 +1099,15 @@ const checkAns = () => {
 
   if (input !== randomWord1) {
     match = false;
-    guess += 1;
+    guess = guess + 1;
     winOrLose.innerText = `you have guess ${guess} time(s)`;
+    if (randomWord1.length > 5 && randomWord1.length < 8 && guess == 5) {
+      winOrLose.innerText = "you are lose";
+      removeChkBtn();
+    } else if (randomWord1.length >= 8 && guess == 3) {
+      winOrLose.innerText = "you are lose";
+      removeChkBtn();
+    }
   } else {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
@@ -1116,7 +1117,7 @@ const checkAns = () => {
 };
 
 const logGuessedWord = () => {
-  if ((guess = 1)) {
+  if (guess >= 1) {
     document.getElementById("guessedWordLog").innerHTML =
       "<h2>You guessed: </h2>";
   }
