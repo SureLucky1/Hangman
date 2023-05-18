@@ -999,6 +999,7 @@ var wordlist = [
   "your",
   "yourself",
 ];
+//////////////////
 
 var html = "";
 var c;
@@ -1025,6 +1026,8 @@ const hard = document.getElementById("hard");
 const guessWord = document.querySelector("#word");
 const guessLine = document.querySelector("#line");
 const showGuessedWord = document.getElementById("guessedWord");
+const checkBtn = document.getElementById("clickme");
+const winOrLose = document.getElementById("win-lose");
 
 let randomWord1 = "";
 const easyWordList = wordlist.filter((word) => word.length <= 5);
@@ -1046,69 +1049,85 @@ const getEightWord = () => {
   return Math.floor(Math.random() * eightWordsList.length);
 };
 
-//The function that could visualize the generated word
-const word = () => {
-  randomWord1 = easyWordList[randomWord()];
+//To show the line
+const showLine = () => {
   for (i = 0; i < randomWord1.length; i++) {
     court.push("-");
   }
+};
+
+//add the line and word into HTML
+const showWord = () => {
   guessWord.innerText = `There are ${randomWord1.length} letter in this word ${randomWord1}`;
   guessLine.innerText = court.join("");
   removeBtn();
-  // easy.removeEventListener("click", word);
-  // medium.removeEventListener("click", fiveWords);
-  // hard.removeEventListener("click", eightWords);
+};
+
+//The function that could visualize the generated word
+const word = () => {
+  randomWord1 = easyWordList[randomWord()];
+  showLine();
+  showWord();
 };
 
 const fiveWords = () => {
   randomWord1 = fiveWordsList[getFiveWord()];
-  for (i = 0; i < randomWord1.length; i++) {
-    court.push("-");
-  }
+  showLine();
 
   if (guess >= 5) {
-    console.log("you are lose");
+    winOrLose.innerText = "you are lose";
     match == ture;
   }
-  guessWord.innerText = randomWord1;
-  guessLine.innerText = court.join("");
-  removeBtn();
-  // easy.removeEventListener("click", word);
-  // medium.removeEventListener("click", fiveWords);
-  // hard.removeEventListener("click", eightWords);
+  showWord();
 };
 
 const eightWords = () => {
   randomWord1 = eightWordsList[getEightWord()];
-  for (i = 0; i < randomWord1.length; i++) {
-    court.push("-");
-  }
-  guessWord.innerText = randomWord1;
-  guessLine.innerText = court.join("");
-  removeBtn();
-  // easy.removeEventListener("click", word);
-  // medium.removeEventListener("click", fiveWords);
-  // hard.removeEventListener("click", eightWords);
+  showLine();
+  showWord();
 };
+
+//When you click different btn, which will gererate different level words
+
+///Change it to button line 1057-1068
+// let ans = prompt("easy, medium, or hard?");
+// if (ans == "easy") {
+//   word();
+//   console.log(randomWord1);
+// } else if (ans == "medium") {
+//   fiveWords();
+//   console.log(randomFiveWords);
+// } else if (ans == "hard") {
+//   eightWords();
+// } else {
+//   let ans = prompt("easy, medium, or hard?");
+// }
+
+easy.addEventListener("click", word);
+medium.addEventListener("click", fiveWords);
+hard.addEventListener("click", eightWords);
 
 const checkAns = () => {
   let input = name1.innerText.toLowerCase();
 
-  for (i = 0; i < input.length; i++) {
+  for (i = 0; i < randomWord1.length; i++) {
     if (input[i] == randomWord1[i]) {
       guessedlist.push(randomWord1[i]);
       court[i] = input[i];
     }
   }
+  guessLine.innerText = court.join("");
+  // console.log(guessLine.innerText);
 
   if (input !== randomWord1) {
-    let match = false;
-    guess = guess + 1;
-    console.log(`you have guess ${guess} time(s)`);
+    match = false;
+    guess += 1;
+    winOrLose.innerText = `you have guess ${guess} time(s)`;
   } else {
-    console.log("congratulations");
+    winOrLose.innerText = "congratulations";
+    removeChkBtn();
   }
-  guessLine.innerText = court.join("");
+  // guessLine.innerText = court.join("");
   logGuessedWord();
   name1.innerText = "";
 };
@@ -1129,12 +1148,15 @@ const removeBtn = () => {
   hard.remove();
 };
 
-document.getElementById("clickme").addEventListener("click", checkAns);
+const removeChkBtn = () => {
+  checkBtn.remove();
+};
 
 //When you click different btn, which will gererate different level words
 easy.addEventListener("click", word);
 medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
+checkBtn.addEventListener("click", checkAns);
 
 // checkAns();
 // while (match !== true) {
