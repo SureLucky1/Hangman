@@ -1064,13 +1064,13 @@ const showWord = () => {
 
 //The function that could visualize the generated word
 const word = () => {
-  randomWord1 = easyWordList[randomWord()];
+  randomWord1 = easyWordList[randomWord()].toUpperCase();
   showLine();
   showWord();
 };
 
 const fiveWords = () => {
-  randomWord1 = fiveWordsList[getFiveWord()];
+  randomWord1 = fiveWordsList[getFiveWord()].toUpperCase();
   showLine();
 
   if (guess >= 5) {
@@ -1081,7 +1081,7 @@ const fiveWords = () => {
 };
 
 const eightWords = () => {
-  randomWord1 = eightWordsList[getEightWord()];
+  randomWord1 = eightWordsList[getEightWord()].toUpperCase();
   showLine();
   showWord();
 };
@@ -1092,7 +1092,7 @@ medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
 
 const checkAns = () => {
-  let input = name1.innerText.toLowerCase();
+  let input = name1.innerText;
 
   for (i = 0; i < randomWord1.length; i++) {
     if (input[i] == randomWord1[i]) {
@@ -1114,7 +1114,7 @@ const checkAns = () => {
 
   //log user guessed word
   logGuessedWord();
-  name1.innerText = ""; //clear user input
+  input = ""; //clear user input
 };
 
 const logGuessedWord = () => {
