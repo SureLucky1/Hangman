@@ -999,9 +999,11 @@ var wordlist = [
   "your",
   "yourself",
 ];
+//////////////////
 
 var html = "";
 var c;
+
 for (var i = 65; 90 >= i; i++) {
   // A-65, Z-90
   c = String.fromCharCode(i);
@@ -1009,6 +1011,7 @@ for (var i = 65; 90 >= i; i++) {
 }
 document.getElementById("box").innerHTML = html;
 let name1 = document.getElementById("name");
+
 var setLetter = function (x) {
   //The input's length can't exceed the length of generated word
   if (name1.innerText.length < randomWord1.length) {
@@ -1022,6 +1025,8 @@ const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
 const guessWord = document.querySelector("#word");
 const guessLine = document.querySelector("#line");
+const checkBtn = document.getElementById("clickme");
+const winOrLose = document.getElementById("win-lose");
 
 let randomWord1 = "";
 const easyWordList = wordlist.filter((word) => word.length <= 5);
@@ -1043,46 +1048,44 @@ const getEightWord = () => {
   return Math.floor(Math.random() * eightWordsList.length);
 };
 
-//The function that could visualize the generated word
-const word = () => {
-  randomWord1 = easyWordList[randomWord()];
+//To show the line
+const showLine = () => {
   for (i = 0; i < randomWord1.length; i++) {
     court.push("-");
   }
+};
+
+//add the line and word into HTML
+const showWord = () => {
   guessWord.innerText = randomWord1;
   guessLine.innerText = court.join("");
   easy.removeEventListener("click", word);
   medium.removeEventListener("click", fiveWords);
   hard.removeEventListener("click", eightWords);
+};
+
+//The function that could visualize the generated word
+const word = () => {
+  randomWord1 = easyWordList[randomWord()];
+  showLine();
+  showWord();
 };
 
 const fiveWords = () => {
   randomWord1 = fiveWordsList[getFiveWord()];
-  for (i = 0; i < randomWord1.length; i++) {
-    court.push("-");
-  }
+  showLine();
 
   if (guess >= 5) {
-    console.log("you are lose");
+    winOrLose.innerText = "you are lose";
     match == ture;
   }
-  guessWord.innerText = randomWord1;
-  guessLine.innerText = court.join("");
-  easy.removeEventListener("click", word);
-  medium.removeEventListener("click", fiveWords);
-  hard.removeEventListener("click", eightWords);
+  showWord();
 };
 
 const eightWords = () => {
   randomWord1 = eightWordsList[getEightWord()];
-  for (i = 0; i < randomWord1.length; i++) {
-    court.push("-");
-  }
-  guessWord.innerText = randomWord1;
-  guessLine.innerText = court.join("");
-  easy.removeEventListener("click", word);
-  medium.removeEventListener("click", fiveWords);
-  hard.removeEventListener("click", eightWords);
+  showLine();
+  showWord();
 };
 
 
@@ -1108,37 +1111,24 @@ medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
 
 
- const checkAns = () => {
-   let input = prompt("");
-   for (j = 0; j < input.length; j++) {
-     for (i = 0; i < input.length; i++) {
-       if (input[i] == randomWord1[i]) {
-         guessedlist.push(randomWord1[i]);
-         court[i] = input[i];
-       } else if (
-         randomWord1.includes(input[i]) &&
-         input[i] !== randomWord1[i]
-       ) {
-         console.log(input[i] + " is correct but wrong place");
-       }
-     }
-   }
-   console.log(court.join(""));
-
-   if (input !== randomWord1) {
-     let match = false;
-     guess = guess + 1;
-     console.log(`you have guess ${guess} time(s)`);
-     if(guess = 5){
-      console.log(`The answer is ${randomWord1}`)
+const checkAns = () => {
+  for (i = 0; i < name1.innerText.length; i++) {
+    if (name1.innerText[i] == guessWord.innerText[i]) {
+      guessedlist.push(randomWord1[i]);
+      court[i] = name1.innerText[i];
     }
-   } else {
-     console.log("congratulations");
-   }
- };
+  }
+  name1.innerText = "";
+  guessLine.innerText = court.join("");
+  console.log(guessLine.innerText);
 
- checkAns();
- while (match !== true) {
-   checkAns();
- }
+  if (name1.innerText !== randomWord1) {
+    match = false;
+    guess += 1;
+    // winOrLose.innerText = `you have guess ${guess} time(s)`;
+  } else {
+    winOrLose.innerText = "congratulations";
+  }
+};
+checkBtn.addEventListener("click", checkAns);
 
