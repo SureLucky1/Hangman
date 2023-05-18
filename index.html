@@ -7,18 +7,23 @@
     <link href="./style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div id="box"></div>
-    <div id="name"></div>
-    <div>
-      <p id="noInput"></p>
-      <p id="word"></p>
-      <p id="line"></p>
-      <h1 id="win-lose"></h1>
+    <div class="container-c">
+      <div id="box" class="right"></div>
+      <div class="left">
+        <div id="name"></div>
+        <div>
+          <p id="noInput"></p>
+          <p id="word"></p>
+          <p id="line"></p>
+          <h1 id="win-lose"></h1>
+        </div>
+        <div id="guessedWordLog"></div>
+        <div>
+          <ol id="guessedWord"></ol>
+        </div>
+      </div>
     </div>
-    <div id="guessedWordLog"></div>
-    <div>
-      <ol id="guessedWord"></ol>
-    </div>
+
     <div style="margin-top: 200px; border: black 1px dotted">
       <button id="easy">Easy</button>
       <button id="medium">Medium</button>

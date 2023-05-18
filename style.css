@@ -1,0 +1,39 @@
+.container-c {
+  display: flex;
+  margin: 0 auto;
+}
+.left {
+  flex: 45%;
+  border: 1px black solid;
+}
+
+.right {
+  flex: 45%;
+  border: 1px red solid;
+}
+
+#box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#box button {
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 10px 5px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 22px;
+  border-radius: 5px;
+  padding: 0 10px;
+}
+
+#box button:hover {
+  background-color: rgb(196, 193, 193);
+}
+
+#name {
+  font-size: 25px;
+  font-weight: bold;
+}
