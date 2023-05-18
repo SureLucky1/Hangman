@@ -1025,6 +1025,7 @@ const medium = document.getElementById("medium");
 const hard = document.getElementById("hard");
 const guessWord = document.querySelector("#word");
 const guessLine = document.querySelector("#line");
+const showGuessedWord = document.getElementById("guessedWord");
 const checkBtn = document.getElementById("clickme");
 const winOrLose = document.getElementById("win-lose");
 
@@ -1057,11 +1058,9 @@ const showLine = () => {
 
 //add the line and word into HTML
 const showWord = () => {
-  guessWord.innerText = randomWord1;
+  guessWord.innerText = `There are ${randomWord1.length} letter in this word ${randomWord1}`;
   guessLine.innerText = court.join("");
-  easy.removeEventListener("click", word);
-  medium.removeEventListener("click", fiveWords);
-  hard.removeEventListener("click", eightWords);
+  removeBtn();
 };
 
 //The function that could visualize the generated word
@@ -1094,24 +1093,50 @@ medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
 
 const checkAns = () => {
-  for (i = 0; i < name1.innerText.length; i++) {
-    if (name1.innerText[i] == guessWord.innerText[i]) {
+  let input = name1.innerText.toLowerCase();
+
+  for (i = 0; i < randomWord1.length; i++) {
+    if (input[i] == randomWord1[i]) {
       guessedlist.push(randomWord1[i]);
-      court[i] = name1.innerText[i];
+      court[i] = input[i];
     }
   }
-  name1.innerText = "";
   guessLine.innerText = court.join("");
-  console.log(guessLine.innerText);
 
-  if (name1.innerText !== randomWord1) {
+  if (input !== randomWord1) {
     match = false;
     guess += 1;
+    winOrLose.innerText = `you have guess ${guess} time(s)`;
+  } else {
     winOrLose.innerText = "congratulations";
-    // winOrLose.innerText = `you have guess ${guess} time(s)`;
+    removeChkBtn();
   }
-  //  else {
-  //   winOrLose.innerText = "congratulations";
-  // }
+  logGuessedWord();
+  name1.innerText = "";
 };
+
+const logGuessedWord = () => {
+  if ((guess = 1)) {
+    document.getElementById("guessedWordLog").innerHTML =
+      "<h2>You guessed: </h2>";
+  }
+  create_li = document.createElement("li");
+  create_li.innerHTML = name1.innerText;
+  document.querySelector("ol").appendChild(create_li);
+};
+
+const removeBtn = () => {
+  easy.remove();
+  medium.remove();
+  hard.remove();
+};
+
+const removeChkBtn = () => {
+  checkBtn.remove();
+};
+
+//When you click different btn, which will gererate different level words
+easy.addEventListener("click", word);
+medium.addEventListener("click", fiveWords);
+hard.addEventListener("click", eightWords);
 checkBtn.addEventListener("click", checkAns);
