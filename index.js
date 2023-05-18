@@ -1086,26 +1086,6 @@ const eightWords = () => {
   showWord();
 };
 
-//When you click different btn, which will gererate different level words
-
-///Change it to button line 1057-1068
-// let ans = prompt("easy, medium, or hard?");
-// if (ans == "easy") {
-//   word();
-//   console.log(randomWord1);
-// } else if (ans == "medium") {
-//   fiveWords();
-//   console.log(randomFiveWords);
-// } else if (ans == "hard") {
-//   eightWords();
-// } else {
-//   let ans = prompt("easy, medium, or hard?");
-// }
-
-easy.addEventListener("click", word);
-medium.addEventListener("click", fiveWords);
-hard.addEventListener("click", eightWords);
-
 const checkAns = () => {
   let input = name1.innerText;
 
@@ -1133,7 +1113,6 @@ const checkAns = () => {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
   }
-
   //log user guessed word
   logGuessedWord();
   input = ""; //clear user input
