@@ -1076,50 +1076,53 @@ const eightWords = () => {
 };
 
 ///Change it to button line 1057-1068
-// let ans = prompt("easy, medium, or hard?");
-// if (ans == "easy") {
-//   word();
-//   console.log(randomWord1);
-// } else if (ans == "medium") {
-//   fiveWords();
-//   console.log(randomFiveWords);
-// } else if (ans == "hard") {
-//   eightWords();
-// } else {
-//   let ans = prompt("easy, medium, or hard?");
-// }
+ let ans = prompt("easy, medium, or hard?");
+ if (ans == "easy") {
+   word();
+   console.log(randomWord1);
+ } else if (ans == "medium") {
+   fiveWords();
+   console.log(randomFiveWords);
+ } else if (ans == "hard") {
+   eightWords();
+ } else {
+   let ans = prompt("easy, medium, or hard?");
+ }
 
 easy.addEventListener("click", word);
 medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
 
-// const checkAns = () => {
-//   let input = prompt("");
-//   for (j = 0; j < input.length; j++) {
-//     for (i = 0; i < input.length; i++) {
-//       if (input[i] == randomWord1[i]) {
-//         guessedlist.push(randomWord1[i]);
-//         court[i] = input[i];
-//       } else if (
-//         randomWord1.includes(input[i]) &&
-//         input[i] !== randomWord1[i]
-//       ) {
-//         console.log(input[i] + " is correct but wrong place");
-//       }
-//     }
-//   }
-//   console.log(court.join(""));
+ const checkAns = () => {
+   let input = prompt("");
+   for (j = 0; j < input.length; j++) {
+     for (i = 0; i < input.length; i++) {
+       if (input[i] == randomWord1[i]) {
+         guessedlist.push(randomWord1[i]);
+         court[i] = input[i];
+       } else if (
+         randomWord1.includes(input[i]) &&
+         input[i] !== randomWord1[i]
+       ) {
+         console.log(input[i] + " is correct but wrong place");
+       }
+     }
+   }
+   console.log(court.join(""));
 
-//   if (input !== randomWord1) {
-//     let match = false;
-//     guess = guess + 1;
-//     console.log(`you have guess ${guess} time(s)`);
-//   } else {
-//     console.log("congratulations");
-//   }
-// };
+   if (input !== randomWord1) {
+     let match = false;
+     guess = guess + 1;
+     console.log(`you have guess ${guess} time(s)`);
+     if(guess = 5){
+      console.log(`The answer is ${randomWord1}`)
+    }
+   } else {
+     console.log("congratulations");
+   }
+ };
 
-// checkAns();
-// while (match !== true) {
-//   checkAns();
-// }
+ checkAns();
+ while (match !== true) {
+   checkAns();
+ }
