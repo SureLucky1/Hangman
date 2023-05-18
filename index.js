@@ -1009,6 +1009,7 @@ for (var i = 65; 90 >= i; i++) {
   c = String.fromCharCode(i);
   html += "<button onclick=\"setLetter('" + c + "');\">" + c + "</button>";
 }
+
 document.getElementById("box").innerHTML = html;
 let name1 = document.getElementById("name");
 
@@ -1069,33 +1070,32 @@ const showWord = () => {
 
 //The function that could visualize the generated word
 const word = () => {
-  randomWord1 = easyWordList[randomWord()].toUpperCase();
+  randomWord1 = easyWordList[randomWord()];
   showLine();
   showWord();
 };
 
 const fiveWords = () => {
-  randomWord1 = fiveWordsList[getFiveWord()].toUpperCase();
+  randomWord1 = fiveWordsList[getFiveWord()];
   showLine();
   showWord();
 };
 
 const eightWords = () => {
-  randomWord1 = eightWordsList[getEightWord()].toUpperCase();
+  randomWord1 = eightWordsList[getEightWord()];
   showLine();
   showWord();
 };
 
 const checkAns = () => {
-  let input = name1.innerText;
+  let input = name1.innerText.toLowerCase();
 
   for (i = 0; i < randomWord1.length; i++) {
     if (input[i] == randomWord1[i]) {
+      guessedlist.push(randomWord1[i]);
       court[i] = input[i];
     }
   }
-
-  //shows which letter is correct
   guessLine.innerText = court.join("");
 
   if (input !== randomWord1) {
@@ -1113,9 +1113,8 @@ const checkAns = () => {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
   }
-  //log user guessed word
   logGuessedWord();
-  input = ""; //clear user input
+  name1.innerText = "";
 };
 
 const logGuessedWord = () => {
@@ -1128,14 +1127,12 @@ const logGuessedWord = () => {
   document.querySelector("ol").appendChild(create_li);
 };
 
-//remove button after level select
 const removeBtn = () => {
   easy.remove();
   medium.remove();
   hard.remove();
 };
 
-//remove button after finish the game
 const removeChkBtn = () => {
   checkBtn.remove();
 };
