@@ -1033,9 +1033,8 @@ let randomWord1 = "";
 const easyWordList = wordlist.filter((word) => word.length <= 5);
 const fiveWordsList = wordlist.filter((word) => word.length > 5);
 const eightWordsList = wordlist.filter((word) => word.length >= 8);
-let court = [];
-let guess = 0;
-let guessedlist = [];
+let court = []; //storage the guessing word eg: _ _ _ _ _
+let guess = 0; //storage guess count
 let match = false;
 
 //To generate a random word
@@ -1088,21 +1087,6 @@ const eightWords = () => {
 };
 
 //When you click different btn, which will gererate different level words
-
-///Change it to button line 1057-1068
-// let ans = prompt("easy, medium, or hard?");
-// if (ans == "easy") {
-//   word();
-//   console.log(randomWord1);
-// } else if (ans == "medium") {
-//   fiveWords();
-//   console.log(randomFiveWords);
-// } else if (ans == "hard") {
-//   eightWords();
-// } else {
-//   let ans = prompt("easy, medium, or hard?");
-// }
-
 easy.addEventListener("click", word);
 medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
@@ -1112,12 +1096,12 @@ const checkAns = () => {
 
   for (i = 0; i < randomWord1.length; i++) {
     if (input[i] == randomWord1[i]) {
-      guessedlist.push(randomWord1[i]);
       court[i] = input[i];
     }
   }
+
+  //shows which letter is correct
   guessLine.innerText = court.join("");
-  // console.log(guessLine.innerText);
 
   if (input !== randomWord1) {
     match = false;
@@ -1127,13 +1111,14 @@ const checkAns = () => {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
   }
-  // guessLine.innerText = court.join("");
+
+  //log user guessed word
   logGuessedWord();
-  name1.innerText = "";
+  name1.innerText = ""; //clear user input
 };
 
 const logGuessedWord = () => {
-  if ((guess = 1)) {
+  if (guess >= 1) {
     document.getElementById("guessedWordLog").innerHTML =
       "<h2>You guessed: </h2>";
   }
@@ -1142,12 +1127,14 @@ const logGuessedWord = () => {
   document.querySelector("ol").appendChild(create_li);
 };
 
+//remove button after level select
 const removeBtn = () => {
   easy.remove();
   medium.remove();
   hard.remove();
 };
 
+//remove button after finish the game
 const removeChkBtn = () => {
   checkBtn.remove();
 };
