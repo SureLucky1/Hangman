@@ -1107,9 +1107,11 @@ const checkAns = () => {
   if (name1.innerText !== randomWord1) {
     match = false;
     guess += 1;
-    // winOrLose.innerText = `you have guess ${guess} time(s)`;
-  } else {
     winOrLose.innerText = "congratulations";
+    // winOrLose.innerText = `you have guess ${guess} time(s)`;
   }
+  //  else {
+  //   winOrLose.innerText = "congratulations";
+  // }
 };
 checkBtn.addEventListener("click", checkAns);
