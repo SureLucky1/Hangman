@@ -1123,6 +1123,9 @@ const checkAns = () => {
     match = false;
     guess += 1;
     winOrLose.innerText = `you have guess ${guess} time(s)`;
+    if(guess = 5){
+      winOrLose.innerText = `you have failed since you have guess ${guess} time(s). The answer is ${randomWord1}`;
+    }
   } else {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
