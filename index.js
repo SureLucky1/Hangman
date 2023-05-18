@@ -1002,6 +1002,7 @@ var wordlist = [
 
 var html = "";
 var c;
+
 for (var i = 65; 90 >= i; i++) {
   // A-65, Z-90
   c = String.fromCharCode(i);
@@ -1011,6 +1012,7 @@ document.getElementById("box").innerHTML = html;
 
 var setLetter = function (x) {
   document.getElementById("name").innerHTML += x;
+  checkAns(x.toLowerCase());
 };
 
 ////////////////////////////////////////////
@@ -1042,6 +1044,7 @@ const word = () => {
   for (i = 0; i < randomWord1.length; i++) {
     court.push("-");
   }
+  console.log(randomWord1);
   guessWord.innerHTML = court.join("");
   easy.removeEventListener("click", word);
   medium.removeEventListener("click", fiveWords);
@@ -1092,6 +1095,18 @@ const eightWords = () => {
 easy.addEventListener("click", word);
 medium.addEventListener("click", fiveWords);
 hard.addEventListener("click", eightWords);
+
+const checkAns = (x) => {
+  for (i = 0; i < randomWord1.length; i++) {
+    if (x === randomWord1[i]) {
+      guessedlist.push(randomWord1[i]);
+      court[i] = x;
+    } else {
+      console.log(x + " is not in this word");
+    }
+  }
+  document.getElementById("cou").innerText = court.join("");
+};
 
 // const checkAns = () => {
 //   let input = prompt("");
