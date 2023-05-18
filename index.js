@@ -1069,32 +1069,33 @@ const showWord = () => {
 
 //The function that could visualize the generated word
 const word = () => {
-  randomWord1 = easyWordList[randomWord()];
+  randomWord1 = easyWordList[randomWord()].toUpperCase();
   showLine();
   showWord();
 };
 
 const fiveWords = () => {
-  randomWord1 = fiveWordsList[getFiveWord()];
+  randomWord1 = fiveWordsList[getFiveWord()].toUpperCase();
   showLine();
   showWord();
 };
 
 const eightWords = () => {
-  randomWord1 = eightWordsList[getEightWord()];
+  randomWord1 = eightWordsList[getEightWord()].toUpperCase();
   showLine();
   showWord();
 };
 
 const checkAns = () => {
-  let input = name1.innerText.toLowerCase();
+  let input = name1.innerText;
 
   for (i = 0; i < randomWord1.length; i++) {
     if (input[i] == randomWord1[i]) {
-      guessedlist.push(randomWord1[i]);
       court[i] = input[i];
     }
   }
+
+  //shows which letter is correct
   guessLine.innerText = court.join("");
 
   if (input !== randomWord1) {
@@ -1112,8 +1113,9 @@ const checkAns = () => {
     winOrLose.innerText = "congratulations";
     removeChkBtn();
   }
+  //log user guessed word
   logGuessedWord();
-  name1.innerText = "";
+  input = ""; //clear user input
 };
 
 const logGuessedWord = () => {
@@ -1126,12 +1128,14 @@ const logGuessedWord = () => {
   document.querySelector("ol").appendChild(create_li);
 };
 
+//remove button after level select
 const removeBtn = () => {
   easy.remove();
   medium.remove();
   hard.remove();
 };
 
+//remove button after finish the game
 const removeChkBtn = () => {
   checkBtn.remove();
 };
